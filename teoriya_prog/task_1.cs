@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace teoriya_prog
 {
@@ -6,7 +7,60 @@ namespace teoriya_prog
     {
         public static void Main(string[] args)
         {
-            Task5();
+            Task6();
+        }
+        
+        
+        // Шестой номер
+        private class Book
+        {
+            public string nameBook; // Имя книги
+            public string authorBook; // Автор книги
+            public int costBook; // Цена книги
+            public int quantityBook; // Кол-во книги
+        }
+        
+        private static void Task6()
+        {
+            string lastEntry;
+            Book[] booksBank; // Массив всех книг
+            List<Book> booksBankList = new List<Book>(); // Список книг (Далее, как вы и просили, будет массив)
+
+            do
+            {
+                Book bookTemplate = new Book();
+                Console.Write("Введите название книги >");
+                lastEntry = Console.ReadLine();
+                if (lastEntry != "")
+                {
+                    bookTemplate.nameBook = lastEntry;
+                    Console.Write("Введите автора книги >");
+                    bookTemplate.authorBook = Console.ReadLine();
+                    Console.Write("Введите стоимость книги >");
+                    bookTemplate.costBook = Convert.ToInt16(Console.ReadLine());
+                    Console.Write("Введите кол-во экземпляров книги >");
+                    bookTemplate.quantityBook = Convert.ToInt16(Console.ReadLine());
+                    booksBankList.Add(bookTemplate);
+                }
+            } while (lastEntry != "");
+
+            booksBank = booksBankList.ToArray(); // преобразование List в Array
+            
+            Task6LinePainter();
+            Console.WriteLine($"{"№", 4}{"Название книги", 35}{"Автор", 20}{"Цена, ₽", 10}{"Кол-во экземпляров", 20}");
+            Task6LinePainter();
+
+            for (int i = 0; i < booksBank.Length; i++)
+            {
+                Console.WriteLine($"{i + 1, 4}{booksBank[i].nameBook, 35}{booksBank[i].authorBook, 20}{booksBank[i].costBook, 10}{booksBank[i].quantityBook, 20}");
+            }
+            Task6LinePainter();
+            
+        }
+
+        private static void Task6LinePainter()
+        {
+            Console.WriteLine(new string('=', 100));
         }
 
         
@@ -103,7 +157,7 @@ namespace teoriya_prog
                 if ((materialStick > materialName.Length || materialStick < 1) && materialStick != 0)
                 {
                     Console.WriteLine($"[ERROR]: Вы не можете выбрать такой материал. Введите значение от 1 до {materialName.Length}!");
-                    materialStick = Task4SelectMaterial(materialName, materialDensity);
+                    materialStick = Task5SelectMaterial(materialName, materialDensity);
                 }
                 else if (materialStick == 0)
                 {
